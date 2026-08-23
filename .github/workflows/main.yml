@@ -1,0 +1,47 @@
+Create the GitHub Actions CI workflow for this repository.
+
+Create this file exactly:
+
+.github/workflows/ci.yml
+
+Contents:
+
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Build
+        run: npm run build
+
+      - name: Lint
+        run: npm run lint
+
+Do not modify any other files.
+Do not add API keys or secrets.
+Do not change the Prisma schema.
+Do not implement Perplexity.
+Do not add Phase 2 functionality.
+
+After creating the file, tell me exactly what changed and wait for confirmation before committing/pushing.
